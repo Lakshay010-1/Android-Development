@@ -8,7 +8,7 @@ const readNfcTag = async (req, res) => {
 
     try {
         const pool = await poolPromise;
-        const response = await pool.request.input("id", id).query("SELECT * FROM user_credentials WHERE entry_tag=@id");
+        const response = await pool.request.input("id", id).query("SELECT * FROM user_credentials WHERE entryPass=@id");
         return res.status(200).json({ message: "Successfully fetched tag", data: response.recordSet[0] });
     } catch (error) {
         return res.status(500).json({ message: "Error reading nfc : " + error.message, data: null })
